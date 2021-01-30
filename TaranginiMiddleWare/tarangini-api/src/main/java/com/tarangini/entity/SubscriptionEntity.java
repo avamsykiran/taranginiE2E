@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="subscriptions")
-public class Subscription implements Comparable<Subscription> {
+public class SubscriptionEntity implements Comparable<SubscriptionEntity> {
 	@Id
 	@Column(name="subscription_id")
 	@GeneratedValue
@@ -22,11 +22,11 @@ public class Subscription implements Comparable<Subscription> {
 	
 	@ManyToOne
 	@JoinColumn(name="package_code")
-	private Package packaze;
+	private PackageEntity packaze;
 	
 	@ManyToOne
 	@JoinColumn(name="subscriber_id")
-	private Subscriber subscriber;
+	private SubscriberEntity subscriber;
 	
 	@Column(name="date_valid_from", nullable=false)
 	private LocalDate dateValidFrom;
@@ -41,11 +41,11 @@ public class Subscription implements Comparable<Subscription> {
 	@Column(name="fee", nullable=false)
 	private Double fee;
 	
-	public Subscription() {
+	public SubscriptionEntity() {
 		/* default constructor */
 	}
 
-	public Subscription(Long subscriptionId, Package packaze, Subscriber subscriber, LocalDate dateValidFrom,
+	public SubscriptionEntity(Long subscriptionId, PackageEntity packaze, SubscriberEntity subscriber, LocalDate dateValidFrom,
 			LocalDate dateValidTo, SubscriptionTerm term, Double fee) {
 		super();
 		this.subscriptionId = subscriptionId;
@@ -65,19 +65,19 @@ public class Subscription implements Comparable<Subscription> {
 		this.subscriptionId = subscriptionId;
 	}
 
-	public Package getPackaze() {
+	public PackageEntity getPackaze() {
 		return packaze;
 	}
 
-	public void setPackaze(Package packaze) {
+	public void setPackaze(PackageEntity packaze) {
 		this.packaze = packaze;
 	}
 
-	public Subscriber getSubscriber() {
+	public SubscriberEntity getSubscriber() {
 		return subscriber;
 	}
 
-	public void setSubscriber(Subscriber subscriber) {
+	public void setSubscriber(SubscriberEntity subscriber) {
 		this.subscriber = subscriber;
 	}
 
@@ -135,7 +135,7 @@ public class Subscription implements Comparable<Subscription> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Subscription other = (Subscription) obj;
+		SubscriptionEntity other = (SubscriptionEntity) obj;
 		if (dateValidFrom == null) {
 			if (other.dateValidFrom != null)
 				return false;
@@ -179,7 +179,7 @@ public class Subscription implements Comparable<Subscription> {
 	}
 
 	@Override
-	public int compareTo(Subscription other) {
+	public int compareTo(SubscriptionEntity other) {
 		return this.subscriptionId.compareTo(other.subscriptionId);
 	}
 

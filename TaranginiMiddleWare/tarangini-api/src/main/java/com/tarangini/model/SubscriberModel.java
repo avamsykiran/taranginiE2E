@@ -1,40 +1,36 @@
-package com.tarangini.entity;
+package com.tarangini.model;
 
 import java.time.LocalDate;
-import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Pattern;
 
-@Entity
-@Table(name="subscribers")
-public class Subscriber {
-	@Id
-	@Column(name="subscriber_id")
-	@GeneratedValue
+
+
+public class SubscriberModel {
+	
 	private Long subscriberId;
 	
-	@Column(name="full_name", nullable=false)
+	@NotNull(message="full name cannot be null")	
+	@NotBlank(message="full name cannot be blank")
 	private String fullName;
 	
-	@Column(name="date_of_registration", nullable=false)
+	@NotNull(message="registration date cannot be null")
+	@PastOrPresent(message="registration date cannot be in future")
 	private LocalDate dateOfRegistration;
-
-	@Column(name="mobile_number", nullable=false)
+	
+	@NotNull(message="mobile number cannot be null")
+	@Pattern(regexp = "[1-9][0-9]{9}")
 	private String mobileNumber;
 
-	@OneToMany(mappedBy="subscription")
-	private Set<Subscription> subscriptions;
-	
-	public Subscriber() {
+	public SubscriberModel() {
 		/* default constructor */
 	}
 
-	public Subscriber(Long subscriberId, String fullName, LocalDate dateOfRegistration, String mobileNumber) {
+	public SubscriberModel(Long subscriberId, String fullName, LocalDate dateOfRegistration, String mobileNumber) {
 		super();
 		this.subscriberId = subscriberId;
 		this.fullName = fullName;
@@ -74,14 +70,6 @@ public class Subscriber {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public Set<Subscription> getSubscriptions() {
-		return subscriptions;
-	}
-
-	public void setSubscriptions(Set<Subscription> subscriptions) {
-		this.subscriptions = subscriptions;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -101,7 +89,7 @@ public class Subscriber {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Subscriber other = (Subscriber) obj;
+		SubscriberModel other = (SubscriberModel) obj;
 		if (dateOfRegistration == null) {
 			if (other.dateOfRegistration != null)
 				return false;

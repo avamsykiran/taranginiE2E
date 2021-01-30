@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "packages")
-public class Package {
+public class PackageEntity {
 	@Id
 	@Column(name="package_code")
 	private String packageCode;
@@ -25,13 +25,13 @@ public class Package {
 	private Double monthlyRent;
 
 	@OneToMany(mappedBy="packaze")
-	private Set<Subscription> subscriptions;
+	private Set<SubscriptionEntity> subscriptions;
 	
-	public Package() { 
+	public PackageEntity() { 
 		/* default constructor */
 	}
 
-	public Package(String packageCode, String title, String description, Double monthlyRent) {
+	public PackageEntity(String packageCode, String title, String description, Double monthlyRent) {
 		super();
 		this.packageCode = packageCode;
 		this.title = title;
@@ -71,11 +71,11 @@ public class Package {
 		this.monthlyRent = monthlyRent;
 	}
 
-	public Set<Subscription> getSubscriptions() {
+	public Set<SubscriptionEntity> getSubscriptions() {
 		return subscriptions;
 	}
 
-	public void setSubscriptions(Set<Subscription> subscriptions) {
+	public void setSubscriptions(Set<SubscriptionEntity> subscriptions) {
 		this.subscriptions = subscriptions;
 	}
 
@@ -98,7 +98,7 @@ public class Package {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Package other = (Package) obj;
+		PackageEntity other = (PackageEntity) obj;
 		if (description == null) {
 			if (other.description != null)
 				return false;

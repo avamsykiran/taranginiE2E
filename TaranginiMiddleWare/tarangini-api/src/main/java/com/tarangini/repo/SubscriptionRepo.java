@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.tarangini.entity.Subscription;
+import com.tarangini.entity.SubscriptionEntity;
 
 @Repository
-public interface SubscriptionRepo extends JpaRepository<Subscription, Long>{
+public interface SubscriptionRepo extends JpaRepository<SubscriptionEntity, Long>{
 	
 	@Modifying
 	@Query("update Subscription s set s.dateValidTo=:toDate where s.subscriptionId=:id")
