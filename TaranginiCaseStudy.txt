@@ -1,0 +1,11 @@
+“Tarangini Digital Services” is a DTH operator. They are looking at 
+developing an application to let their subscribers manage their subscriptions.
+
+System Requirements
+---------------------------------
+1. Each Subscriber has to register.
+2. A registered subscriber can identify himself/herself by
+    keying his mobileNumber to access the dashboard. (this can be replaced
+    with login and authentication if security module is being included)
+3. On the dashboard of a subscriber, he should be able to choose from a list of
+    packages and subscribe/unsubscribe from them.
