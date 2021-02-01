@@ -3,6 +3,8 @@ package com.tarangini.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,7 @@ public class SubscriberServiceImpl implements ISubscriberService {
 		return parser.parse(subscriberRepo.findByMobileNumber(mobileNumber));
 	}
 
+	@Transactional
 	@Override
 	public SubscriberModel add(SubscriberModel subscriberModel) throws DuplicateSubscriberException {
 
@@ -50,6 +53,7 @@ public class SubscriberServiceImpl implements ISubscriberService {
 		return subscriberModel;
 	}
 
+	@Transactional
 	@Override
 	public SubscriberModel modify(SubscriberModel subscriberModel, Long id) throws SubscriberNotFoundException {
 		if (subscriberModel != null) {

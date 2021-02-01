@@ -27,7 +27,7 @@ public class SubscriberEntity {
 	@Column(name="mobile_number", nullable=false)
 	private String mobileNumber;
 
-	@OneToMany(mappedBy="subscription")
+	@OneToMany(mappedBy="subscriber")
 	private Set<SubscriptionEntity> subscriptions;
 	
 	public SubscriberEntity() {

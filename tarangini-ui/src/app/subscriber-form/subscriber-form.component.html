@@ -1,0 +1,38 @@
+<section class="container-fluid p-4">
+  
+  <app-msg-box msgType="Error" *ngIf="errMsg">
+    {{errMsg}}
+  </app-msg-box>
+
+  <div class="col-sm-4 mx-auto">
+    <form class="form bg-info p-2" [formGroup]="subscriberForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label class="form-control-label">Full Name</label>
+        <input type="text" class="form-control" formControlName="fullName" />
+        <div *ngIf="control('fullName').invalid && (control('fullName').touched || control('fullName').dirty)" class="alert alert-danger">
+          Full Name is manditory.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label">Date Of Registration</label>
+        <input type="date" class="form-control" formControlName="dateOfRegistration" [readonly]="isEditing"/>
+        <div *ngIf="control('dateOfRegistration').invalid && (control('dateOfRegistration').touched || control('dateOfRegistration').dirty)" class="alert alert-danger">
+          Date Of Registration is manditory and must not be a future date. 
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label">Mobile Number</label>
+        <input type="text" class="form-control" formControlName="mobileNumber" />
+        <div *ngIf="control('mobileNumber').invalid && (control('mobileNumber').touched || control('mobileNumber').dirty)" class="alert alert-danger">
+          Mobile Number is manditory and must be a 10 digit number. 
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-secondary btn-block">
+          {{isEditing?"Save":"Sign Up"}}
+        </button>
+      </div>
+    </form>
+  </div>
+
+</section>

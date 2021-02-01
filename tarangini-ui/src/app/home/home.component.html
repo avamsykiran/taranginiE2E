@@ -1,0 +1,30 @@
+<section class="container p-4">
+
+  <app-msg-box msgType="Info" *ngIf="infoMsg">
+    <strong>{{infoMsg}}</strong>
+  </app-msg-box>
+
+  <app-msg-box msgType="Error" *ngIf="errMsg">
+    <strong>{{errMsg}}</strong>
+  </app-msg-box>
+
+  <div class="col-sm-4 mx-auto">
+    <form #f="ngForm" (ngSubmit)="onSubmit()" >
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Mobile Number" [(ngModel)]="mobileNumber" name="mno"
+          required />
+        <div class="input-group-append">
+          <button class="btn btn-success" type="submit" [disabled]="f.invalid">
+            Sign In
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-sm-4 mx-auto mt-5">
+    <a class="btn btn-info btn-block" routerLink="/register">
+      New to this place? <strong>Sign Up</strong>
+    </a>
+  </div>
+</section>

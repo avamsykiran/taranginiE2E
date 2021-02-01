@@ -27,7 +27,6 @@ public class SubscriptionModel  {
 	@FutureOrPresent(message="to date cannot be in past")
 	private LocalDate dateValidTo;
 	
-
 	@NotNull(message="term cannot be null")
 	@NotBlank(message="term cannot be blank")
 	private String term;
@@ -37,6 +36,8 @@ public class SubscriptionModel  {
 	private Double fee;
 	
 	private String status;
+	private String description;
+	private String packageTitle;
 	
 	public SubscriptionModel() {
 		/* default constructor */
@@ -48,7 +49,7 @@ public class SubscriptionModel  {
 			@NotNull(message = "") @PastOrPresent(message = "") LocalDate dateValidFrom,
 			@NotNull(message = "") @FutureOrPresent(message = "") LocalDate dateValidTo,
 			@NotNull(message = "") @NotBlank(message = "") String term,
-			@NotNull(message = "") @Min(value = 0, message = "") Double fee,String status) {
+			@NotNull(message = "") @Min(value = 0, message = "") Double fee,String status,String description,String packageTitle) {
 		super();
 		this.subscriptionId = subscriptionId;
 		this.packageCode = packageCode;
@@ -58,6 +59,8 @@ public class SubscriptionModel  {
 		this.term = term;
 		this.fee = fee;
 		this.status=status;
+		this.description=description;
+		this.packageTitle=packageTitle;
 	}
 
 
@@ -211,5 +214,26 @@ public class SubscriptionModel  {
 				+ ", subscriberId=" + subscriberId + ", dateValidFrom=" + dateValidFrom + ", dateValidTo=" + dateValidTo
 				+ ", term=" + term + ", fee=" + fee + "]";
 	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public String getPackageTitle() {
+		return packageTitle;
+	}
+
+
+	public void setPackageTitle(String packageTitle) {
+		this.packageTitle = packageTitle;
+	}
+
 	
 }

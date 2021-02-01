@@ -1,0 +1,48 @@
+<section class="container-fluid p-4">
+  <h6>Subscriptions</h6>
+
+  <app-msg-box msgType="Error" *ngIf="errMsg">
+    {{errMsg}}
+  </app-msg-box>
+
+  <app-msg-box msgType="Info" *ngIf="infoMsg">
+    {{infoMsg}}
+  </app-msg-box>
+
+  <ng-container *ngIf="subscriptions && subscriptions.length>0; then showAll; else showMsg">
+  </ng-container>
+
+  <ng-template #showAll>
+    <div class="card-columns">
+      <div class="card bg-info" *ngFor="let s of subscriptions">
+        <div class="card-header">
+          <h6><strong>{{s.packageCode}}</strong>
+            {{s.description}}</h6>
+        </div>
+        <div class="card-body">
+          <p>
+            Validity: {{s.dateValidFrom|date:'dd-MMM-yyyy'}} to {{s.dateValidTo|date:'dd-MMM-yyyy'}} <br />
+            Cost: {{s.fee}}<br />
+            Status: {{s.status}}</p>
+        </div>
+        <div class="card-footer text-right">          
+          <button class="btn btn-sm btn-primary mr-3" 
+          [disabled]="s.status==='CLOSED'"
+          (click)="renew(s.subscriptionId)"
+          >
+          Renew
+        </button>
+          <button class="btn btn-sm btn-danger" 
+          [disabled]="s.status==='CLOSED'"
+          (click)="unsubscribe(s.subscriptionId)"
+          >UnSubscribe</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #showMsg>
+    <app-msg-box msgType="Info">
+      <p>Nothing subscribed yet!!</p>
+    </app-msg-box>
+  </ng-template>
+</section>

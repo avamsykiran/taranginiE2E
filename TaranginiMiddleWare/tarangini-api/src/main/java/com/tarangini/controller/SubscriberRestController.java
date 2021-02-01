@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,12 +25,13 @@ import com.tarangini.service.ISubscriberService;
 
 @RestController
 @RequestMapping("/subscribers")
+@CrossOrigin
 public class SubscriberRestController {
 
 	@Autowired
 	private ISubscriberService subscriberService;
 	
-	@GetMapping("/{subscriberId}")
+	@GetMapping("/{subscriberId}:[0-9]{1,5}")
 	public ResponseEntity<SubscriberModel> getById(@PathVariable("subscriberId") Long id) throws SubscriberNotFoundException {
 		return ResponseEntity.ok(subscriberService.getById(id));
 	}

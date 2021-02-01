@@ -13,6 +13,6 @@ import com.tarangini.entity.SubscriptionEntity;
 public interface SubscriptionRepo extends JpaRepository<SubscriptionEntity, Long>{
 	
 	@Modifying
-	@Query("update Subscription s set s.dateValidTo=:toDate where s.subscriptionId=:id")
+	@Query("update SubscriptionEntity s set s.dateValidTo=:toDate where s.subscriptionId=:id")
 	int changeSubscriptionDateValidTo(LocalDate toDate,Long id);	
 }

@@ -32,7 +32,9 @@ public class EMParser {
 					source.getSubscriber().getSubscriberId(), 
 					source.getDateValidFrom(), 
 					source.getDateValidTo(),String.valueOf(source.getTerm()), 
-					source.getFee(),source.getDateValidTo().isBefore(LocalDate.now())?"ACTIVE":"CLOSED");
+					source.getFee(),source.getDateValidTo().isAfter(LocalDate.now())?"ACTIVE":"CLOSED",
+					source.getPackaze().getDescription(),
+					source.getPackaze().getTitle());
 	}
 	
 	public SubscriptionEntity parse(SubscriptionModel source) {

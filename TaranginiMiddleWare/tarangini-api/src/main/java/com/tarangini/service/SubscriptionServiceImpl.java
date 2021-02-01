@@ -2,6 +2,8 @@ package com.tarangini.service;
 
 import java.time.LocalDate;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,7 @@ public class SubscriptionServiceImpl implements ISubscriptionService {
 		return parser.parse(subscriptionRepo.findById(id).get());
 	}
 
+	@Transactional
 	@Override
 	public SubscriptionModel unsubscribe(Long id) throws SubscriptionNotFoundException {
 
@@ -42,6 +45,7 @@ public class SubscriptionServiceImpl implements ISubscriptionService {
 		return getById(id);
 	}
 
+	@Transactional
 	@Override
 	public SubscriptionModel renew(Long id) throws SubscriptionNotFoundException {
 
@@ -60,6 +64,7 @@ public class SubscriptionServiceImpl implements ISubscriptionService {
 		return getById(id);
 	}
 
+	@Transactional
 	@Override
 	public SubscriptionModel add(SubscriptionModel subscriptionModel) throws DuplicateSubscriptionException{
 		if(subscriptionRepo.existsById(subscriptionModel.getSubscriptionId()))
