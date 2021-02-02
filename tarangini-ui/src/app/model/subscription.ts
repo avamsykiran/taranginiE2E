@@ -1,12 +1,14 @@
 export class Subscription {
-    subscriptionId:number;
-	packageCode:string;
+	subscriptionId:number;
 	subscriberId:number;
+
+	packageCode:string;
+	description:string;
+	packageTitle:string;
+
 	dateValidFrom:Date;
 	dateValidTo:Date;
 	term:string;
 	fee:number;
 	status:string;
-	description:string;
-	packageTitle:string;
 }

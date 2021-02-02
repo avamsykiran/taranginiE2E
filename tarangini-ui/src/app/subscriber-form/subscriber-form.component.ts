@@ -24,8 +24,10 @@ export class SubscriberFormComponent implements OnInit {
     this.subscriberForm = new FormGroup({
       subscriberId: new FormControl('0', [Validators.required]),
       fullName: new FormControl('', [Validators.required]),
-      dateOfRegistration: new FormControl(today, [Validators.required, this.dateValidator]),
-      mobileNumber: new FormControl('', [Validators.required, Validators.pattern(/[1-9][0-9]{9}/)])
+      dateOfRegistration: new FormControl(today, [Validators.required,
+         this.dateValidator]),
+      mobileNumber: new FormControl('', [Validators.required, 
+        Validators.pattern(/[1-9][0-9]{9}/)])
     });
 
     this.isEditing=false;
