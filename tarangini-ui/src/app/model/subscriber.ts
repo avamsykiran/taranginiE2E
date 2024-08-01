@@ -1,4 +1,4 @@
-export class Subscriber {
+export interface Subscriber {
     subscriberId:number;
 	fullName:string;
 	dateOfRegistration:Date;

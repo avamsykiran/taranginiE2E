@@ -9,7 +9,7 @@ import { PackageService } from '../service/package.service';
 })
 export class PackagesListComponent implements OnInit {
 
-  packages:Package[];
+  packages!:Package[];
 
   constructor(private packageService:PackageService) { }
 

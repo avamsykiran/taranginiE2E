@@ -1,4 +1,4 @@
-export class Package {
+export interface Package {
     packageCode:string;
 	title:string;
 	description:string;

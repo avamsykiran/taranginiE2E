@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class MsgBoxComponent  {
 
   @Input()
-  private msgType:string;
+  msgType!:string;
   
   constructor() { }
 }

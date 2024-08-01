@@ -9,7 +9,7 @@ System Requirements
     keying his mobileNumber to access the dashboard. (this can be replaced
     with login and authentication if security module is being included)
             
-3. A subscriber must be albe to edit his profile
+3. A subscriber must be able to edit his profile
             
 4. On the dashboard of a subscriber, he should be able to choose from a list of
     packages and subscribe/unsubscribe/renew from them.           

@@ -10,8 +10,8 @@ import { SubscriberService } from '../service/subscriber.service';
 })
 export class SubscriberDashboardComponent implements OnInit {
 
-  subscriber:Subscriber;
-  infoMsg:string;
+  subscriber!:Subscriber|null;
+  infoMsg!:string;
 
   constructor(
     private subscriberService:SubscriberService,
@@ -23,8 +23,8 @@ export class SubscriberDashboardComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe(
       (params)=>{
-        if(params.msg){
-          this.infoMsg=params.msg;
+        if(params['msg']){
+          this.infoMsg=params['msg'];
           this.subscriber=this.subscriberService.currentSubscriber;
         }
       }

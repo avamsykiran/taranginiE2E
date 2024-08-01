@@ -10,39 +10,39 @@ import { SubscriberService } from '../service/subscriber.service';
 })
 export class HomeComponent implements OnInit {
 
-  mobileNumber:string;
-  infoMsg:string;
-  errMsg:string;
+  mobileNumber!: string;
+  infoMsg!: string;
+  errMsg!: string;
 
   constructor(
-    private router:Router,
-    private routerData:ActivatedRoute,
-    private subscriberService:SubscriberService    
-    ) { 
+    private router: Router,
+    private routerData: ActivatedRoute,
+    private subscriberService: SubscriberService
+  ) {
 
-    }
+  }
 
   ngOnInit() {
     this.routerData.queryParams
-    .subscribe(
-      (params) =>{
-        if(params.msg){
-          this.infoMsg=params.msg;
+      .subscribe(
+        (params) => {
+          if (params['msg']) {
+            this.infoMsg = params['msg'];
+          }
         }
-      }
-    );
+      );
   }
 
-  onSubmit(){
+  onSubmit() {
     this.subscriberService.getByMobileNumber(this.mobileNumber)
-    .subscribe(
-      (data) => {
-        this.subscriberService.currentSubscriber=data;
-        this.router.navigateByUrl("/dashboard");        
-      },
-      (err)=>{
-        this.errMsg=err.error;
-      }
-    );
+      .subscribe({
+        next: (data) => {
+          this.subscriberService.currentSubscriber = data;
+          this.router.navigateByUrl("/dashboard");
+        },
+        error: (err) => {
+          this.errMsg = err.error;
+        }
+      });
   }
 }

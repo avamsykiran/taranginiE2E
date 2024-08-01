@@ -11,69 +11,69 @@ import { SubscriptionService } from '../service/subscription.service';
 })
 export class SubscriptionsComponent implements OnInit {
 
-  subscriptions:Subscription[];
-  errMsg : string;
-  infoMsg:string;
+  subscriptions!: Subscription[];
+  errMsg!: string;
+  infoMsg!: string;
 
   constructor(
-    private subscriberService:SubscriberService,
-    private subscriptionService:SubscriptionService,
-    private activatedRoute:ActivatedRoute
-  ) { 
+    private subscriberService: SubscriberService,
+    private subscriptionService: SubscriptionService,
+    private activatedRoute: ActivatedRoute
+  ) {
 
   }
 
   ngOnInit() {
     this.loadSubscriptions();
     this.activatedRoute.queryParams.subscribe(
-      (params) =>{
-        if(params.infomsg){
-          this.infoMsg=params.infomsg;
+      (params) => {
+        if (params['infomsg']) {
+          this.infoMsg = params['infomsg'];
         }
-        if(params.errmsg){
-          this.errMsg=params.errmsg;
+        if (params['errmsg']) {
+          this.errMsg = params['errmsg'];
         }
       }
     );
   }
 
-  loadSubscriptions(){
-    let subscriberId = this.subscriberService.currentSubscriber.subscriberId;
+  loadSubscriptions() {
+    let subscriberId = this.subscriberService.currentSubscriber!.subscriberId;
 
     this.subscriberService.getSubscriptionsBySubscriberId(subscriberId)
-    .subscribe(
-      (data)=>{
-        this.subscriptions=data;
-      },
-      (err)=>{
-        this.errMsg=err.error;
-      }
-    );
+      .subscribe({
+        next: (data) => {
+          this.subscriptions = data;
+        },
+        error: (err) => {
+          this.errMsg = err.error;
+        }
+      });
   }
 
-  unsubscribe(subsriptionId:number){
+  unsubscribe(subsriptionId: number) {
     this.subscriptionService.unsubscribe(subsriptionId)
-    .subscribe(
-      (data)=>{                
-        this.loadSubscriptions();
-        this.infoMsg=`${data.packageCode} is successfully closed`;
-      },
-      (err)=>{
-        this.errMsg=err.error;
-      }      
-    );
+      .subscribe({
+        next: (data) => {
+          this.loadSubscriptions();
+          this.infoMsg = `${data.packageCode} is successfully closed`;
+        },
+        error: (err) => {
+          this.errMsg = err.error;
+        }
+      });
   }
 
-  renew(subsriptionId:number){
+  renew(subsriptionId: number) {
     this.subscriptionService.renew(subsriptionId)
-    .subscribe(
-      (data)=>{
-        this.loadSubscriptions();
-        this.infoMsg=`${data.packageCode} is successfully extended`;
-      },
-      (err)=>{
-        this.errMsg=err.error;
-      }      
-    );
+      .subscribe({
+        next: (data) => {
+          this.loadSubscriptions();
+          this.infoMsg = `${data.packageCode} is successfully extended`;
+        },
+        error: (err) => {
+          this.errMsg = err.error;
+        }
+      });
   }
 }

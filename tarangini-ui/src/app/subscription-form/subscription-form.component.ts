@@ -12,9 +12,9 @@ import { SubscriptionService } from '../service/subscription.service';
 })
 export class SubscriptionFormComponent implements OnInit {
 
-  subscription: Subscription;
-  monthlyRent:number;
-  today:Date;
+  subscription!: Subscription;
+  monthlyRent!: number;
+  today!: Date;
 
   constructor(
     private packageService: PackageService,
@@ -28,23 +28,23 @@ export class SubscriptionFormComponent implements OnInit {
   ngOnInit() {
     this.activatedRouter.params.subscribe(
       (params) => {
-        let packageCode = params.code;
+        let packageCode = params['code'];
 
         this.packageService.getByCode(packageCode).subscribe(
           (pkg) => {
             this.today = new Date();
-            this.monthlyRent=pkg.monthlyRent;
+            this.monthlyRent = pkg.monthlyRent;
             this.subscription = {
-              subscriptionId:0,
-              subscriberId: this.subscriberService.currentSubscriber.subscriberId,
+              subscriptionId: 0,
+              subscriberId: this.subscriberService.currentSubscriber!.subscriberId,
               dateValidFrom: this.today,
               dateValidTo: new Date(this.today.getFullYear(), this.today.getMonth() + 1, this.today.getDate()),
-              fee:pkg.monthlyRent,
-              description:pkg.description,
-              packageCode:pkg.packageCode,
-              term:"MONTHLY",
-              status:'ACTIVE',
-              packageTitle:pkg.title
+              fee: pkg.monthlyRent,
+              description: pkg.description,
+              packageCode: pkg.packageCode,
+              term: "MONTHLY",
+              status: 'ACTIVE',
+              packageTitle: pkg.title
             };
           }
         );
@@ -52,26 +52,26 @@ export class SubscriptionFormComponent implements OnInit {
     );
   }
 
-  changeTerm(term:string){
-    this.subscription.term=term;
-    if("MONTHLY"===term){
-      this.subscription.dateValidTo=new Date(this.today.getFullYear(), this.today.getMonth() + 1, this.today.getDate()),
-      this.subscription.fee=this.monthlyRent;
-    }else{
-      this.subscription.dateValidTo=new Date(this.today.getFullYear()+1, this.today.getMonth() , this.today.getDate()),
-      this.subscription.fee=this.monthlyRent*12;
+  changeTerm(term: string) {
+    this.subscription.term = term;
+    if ("MONTHLY" === term) {
+      this.subscription.dateValidTo = new Date(this.today.getFullYear(), this.today.getMonth() + 1, this.today.getDate()),
+        this.subscription.fee = this.monthlyRent;
+    } else {
+      this.subscription.dateValidTo = new Date(this.today.getFullYear() + 1, this.today.getMonth(), this.today.getDate()),
+        this.subscription.fee = this.monthlyRent * 12;
     }
   }
 
-  createSubscription(){
+  createSubscription() {
     this.subscriptionService.createSubscription(this.subscription)
-    .subscribe(
-      (data)=>{
-        this.router.navigate(['/dashboard/subscriptions'],{queryParams:{infomsg:`Package#${data.packageTitle} subscribed successfully with subscription id ${data.subscriptionId}}`}})
-      },
-      (err)=>{
-        this.router.navigate(['/dashboard/subscriptions'],{queryParams:{errmsg:err.error}});
-      }
-    );    
+      .subscribe({
+        next: (data) => {
+          this.router.navigate(['/dashboard/subscriptions'], { queryParams: { infomsg: `Package#${data.packageTitle} subscribed successfully with subscription id ${data.subscriptionId}}` } })
+        },
+        error: (err) => {
+          this.router.navigate(['/dashboard/subscriptions'], { queryParams: { errmsg: err.error } });
+        }
+      });
   }
 }

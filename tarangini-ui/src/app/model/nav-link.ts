@@ -1,4 +1,4 @@
-export class NavLink {
-    public linkText:string;
-    public link:string;
+export interface NavLink {
+    linkText:string;
+    link:string;
 }

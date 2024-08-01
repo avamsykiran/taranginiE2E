@@ -1,4 +1,4 @@
-export class Subscription {
+export interface Subscription {
 	subscriptionId:number;
 	subscriberId:number;
 

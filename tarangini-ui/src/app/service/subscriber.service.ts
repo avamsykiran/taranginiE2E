@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { Subscriber } from '../model/subscriber';
 import { Subscription } from '../model/subscription';
 
@@ -10,7 +10,7 @@ import { Subscription } from '../model/subscription';
 })
 export class SubscriberService {
 
-  private _currentSubscriber:Subscriber;
+  private _currentSubscriber!:Subscriber|null;
   private subscribersApi: string;
 
   constructor(private client: HttpClient) {
@@ -18,11 +18,11 @@ export class SubscriberService {
     this.subscribersApi = `${environment.apiPath}/subscribers`;
   }
 
-  get currentSubscriber(){
+  get currentSubscriber():Subscriber|null{
     return this._currentSubscriber;
   }
 
-  set currentSubscriber(cs:Subscriber){
+  set currentSubscriber(cs:Subscriber|null){
     this._currentSubscriber=cs;
   }
   
